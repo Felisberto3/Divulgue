@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  firstName    String?
+  surName      String?
+  passwordHash String
+  img          String?
+  bornDate     DateTime?
+  municipioId  Int
+  Post         Post[]
+  Comment      Comment[]
+}
+
+enum AdminEnum {
+  main
+  normal
+}
+
+model Admin {
+  id              Int               @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  email           String        @unique
+  passwordHash    String?           @default("12345678")
+  type            AdminEnum         @default(normal)
+  Administrations Administrations[]
+}
+
+model Administrations {
+  id        Int         @id @default(autoincrement())
+  name      String     @unique
+  email     String    @unique
+  admin     Admin       @relation(fields: [adminId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  adminId   Int
+  Municipio Municipio[]
+  Post      Post[]
+  Comment   Comment[]
+}
+
+model Provincia {
+  id        Int         @id @default(autoincrement())
+  name      String       @unique
+  Municipio Municipio[]
+}
+
+model Municipio {
+  id               Int             @id @default(autoincrement())
+  name             String             @unique
+  administrations  Administrations @relation(fields: [administrationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  administrationId Int
+  provincia        Provincia       @relation(fields: [provinciaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  provinciaId      Int
+}
+
+model Post {
+  id               Int             @id @default(autoincrement())
+  desc             String
+  img              String?
+  administration   Administrations @relation(fields: [administrationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  administrationId Int
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId           Int
+  Comment          Comment[]
+}
+
+model Comment {
+  id              Int             @id @default(autoincrement())
+  desc            String
+  img             String?
+  Post            Post            @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId          Int
+  administraton   Administrations @relation(fields: [administratonId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  administratonId Int
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId          Int
+}

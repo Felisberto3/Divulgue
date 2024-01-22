@@ -16,6 +16,7 @@ interface IAdministrationsRepositoryDTO {
     create(data: ICreateAdministrationsDTO): Promise<Administrations>
     findById(id: number): Promise<Administrations | null>
     findAll(): Promise<Administrations[] | null>
+    delete(id: number): Promise<boolean>
 }
 
 export { IAdministrationsRepositoryDTO, ICreateAdministrationsDTO, IcreateUseCaseDTO }

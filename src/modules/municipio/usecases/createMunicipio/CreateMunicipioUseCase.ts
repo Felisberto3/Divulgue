@@ -22,7 +22,7 @@ class CreateMunicipioUseCase {
  
 
         return this.municipioRepository.create({
-            provinciaId: provinciaResult?.id,
+            provinciaId: provinciaResult?.id, 
             administrationId: administrationResult.id,
             name,
 

@@ -20,7 +20,7 @@ class CreateAdministrationUseCase {
 
         return  await this.administrationRepository.create({ adminId,email,name})
 
-    }
+    } 
 }
 
 export {CreateAdministrationUseCase } 

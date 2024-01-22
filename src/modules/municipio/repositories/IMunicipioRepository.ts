@@ -15,6 +15,7 @@ interface IMunicipioRepositoryDTO {
     create(data: ICreateMunicipioDTO): Promise<Municipio>
     findById(id: number): Promise<Municipio | null>
     findAll(): Promise<Municipio[] | null>
+    delete(id: number): Promise<boolean>
 }
 
 export { IMunicipioRepositoryDTO, ICreateMunicipioDTO, IcreateUseCaseDTO }

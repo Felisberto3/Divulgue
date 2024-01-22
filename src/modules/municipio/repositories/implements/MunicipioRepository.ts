@@ -25,6 +25,11 @@ class MunicipioRepository implements IMunicipioRepositoryDTO {
         return await prisma.municipio.findFirst({ where: { id }})
     }
 
+    async delete(id: number): Promise<boolean> {
+        await prisma.municipio.delete({ where: { id }})
+        return true
+    }
+
 }
 
 export { MunicipioRepository }

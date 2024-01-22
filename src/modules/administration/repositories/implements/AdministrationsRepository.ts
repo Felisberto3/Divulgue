@@ -6,7 +6,7 @@ class AdministrationsRepository implements IAdministrationsRepositoryDTO {
     constructor() { }
 
     async findAdministrationsByName(name: string): Promise<Administrations | null> {
-        if (name) return null
+        if (!name) return null
         return await prisma.administrations.findUnique({ where: { name }})
     }
 

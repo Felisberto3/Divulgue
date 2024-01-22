@@ -19,7 +19,7 @@ class CreateMunicipioUseCase {
         const administrationResult = await this.administrationsRepository.findAdministrationsByName(administration)
 
         if (!administrationResult) throw new Error("This administracao not exist");
-
+ 
 
         return this.municipioRepository.create({
             provinciaId: provinciaResult?.id,

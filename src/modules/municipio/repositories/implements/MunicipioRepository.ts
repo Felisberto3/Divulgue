@@ -6,13 +6,13 @@ class MunicipioRepository implements IMunicipioRepositoryDTO {
     constructor() { }
 
     async findMunicipioByName(name: string): Promise<Municipio | null> {
-        if (name) return null
+        if (!name) return null
         return await prisma.municipio.findUnique({ where: { name }})
     }
 
     async create(data: ICreateMunicipioDTO): Promise<Municipio> {
         return await prisma.municipio.create({ data : data })
-    }
+    } 
 
     async findAll(): Promise<Municipio[]> {
 

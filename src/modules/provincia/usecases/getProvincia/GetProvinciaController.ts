@@ -13,4 +13,4 @@ class GetProvinciaController {
     }
 }
 
-export { GetProvinciaController }
+export { GetProvinciaController } 

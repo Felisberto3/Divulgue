@@ -14,7 +14,7 @@ userRouter.get('/get/user/:id',async (req:Request, res:Response ) => {
 })
 
 userRouter.delete('/delete/user/:id',async (req:Request, res:Response ) => {
-    return deleteUser.handle(req,res)
+    return deleteUser.handle(req,res) 
 })
-
+ 
 export { userRouter }

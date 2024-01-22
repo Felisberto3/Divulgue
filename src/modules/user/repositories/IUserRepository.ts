@@ -22,6 +22,7 @@ interface IRepositoryDTO {
     findByEmail(email: string): Promise<User | null>
     findById(id: number| null): Promise<User| null>
     findAll(): Promise<User[]>
+    delete(id: number): Promise<boolean>
 }
 
 export { ICreateUserDTO, IRepositoryDTO, ICreateUseCaseDTO }

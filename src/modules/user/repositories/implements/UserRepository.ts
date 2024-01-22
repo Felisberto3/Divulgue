@@ -23,6 +23,12 @@ class UserRepository implements IRepositoryDTO {
     async findAll(): Promise<User[]> {
         return await prisma.user.findMany()
     }
+
+    async delete(id: number): Promise<boolean>{
+
+        await prisma.user.delete({ where: { id }})
+        return true
+    }
 }
 
 export { UserRepository }

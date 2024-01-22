@@ -5,6 +5,7 @@ interface IProvinciaRepositoryDTO {
     findByName(name:string): Promise<Provincia | null>
     findAll(): Promise<Provincia[]>
     findById(id:number): Promise<Provincia | null>
+    delete(id: number): Promise<boolean> 
 }
 
 export { IProvinciaRepositoryDTO }

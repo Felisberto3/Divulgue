@@ -22,6 +22,11 @@ class ProvinciaRepository implements IProvinciaRepositoryDTO {
         if (!name) return  null
         return await prisma.provincia.findUnique({ where: {name}})
     }
+
+    async delete(id: number): Promise<boolean> {
+        await prisma.provincia.delete({ where: { id }})
+        return true
+    }
     
      
 }

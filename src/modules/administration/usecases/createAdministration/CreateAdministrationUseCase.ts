@@ -14,13 +14,13 @@ class CreateAdministrationUseCase {
         if (administrationExist) 
             throw new Error("Administration Already Exist");
 
-        // const admin = await this.adminRepository.findById(adminId)
-        // if (admin) 
-        //     throw new Error("Admin User Id not exist");
+        const admin = await this.adminRepository.findById(adminId)
+        if (!admin) 
+            throw new Error("Admin User Id not exist");
 
         return  await this.administrationRepository.create({ adminId,email,name})
 
     }
 }
 
-export {CreateAdministrationUseCase }
+export {CreateAdministrationUseCase } 

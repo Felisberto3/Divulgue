@@ -22,6 +22,7 @@ interface IAdminRepositoryDTO {
     create(data: ICreateAdminDTO): Promise<Admin>
     findById(id: number): Promise<Admin | null>
     findAll(): Promise<Admin[] | null>
+    delete(id: number): Promise<boolean>
 }
 
 export { IAdminRepositoryDTO, ICreateAdminDTO, IcreateUseCaseDTO, IAuthUserDTO }

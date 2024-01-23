@@ -20,7 +20,7 @@ class CreateUserUseCase {
         const passwordHash = await hash(password, 8)
 
         const municipioResult = await this.municipioRepository.findMunicipioByName(municipio)
-
+        
         if (!municipioResult) 
             throw new Error("Municipio does not exist, please try another!");
 

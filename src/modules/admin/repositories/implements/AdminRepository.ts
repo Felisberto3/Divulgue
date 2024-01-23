@@ -24,6 +24,10 @@ class AdminRepository implements IAdminRepositoryDTO {
 
         return await prisma.admin.findFirst({ where: { id }})
     }
+    async delete(id: number): Promise<boolean> {
+         await prisma.admin.delete({ where: { id }})
+         return true
+    }
 
 }
 

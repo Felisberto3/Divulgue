@@ -34,9 +34,9 @@ class UserRepository implements IRepositoryDTO {
         return await prisma.user.update({
             where: { id },
             data: { bornDate, email, firstName, surName, img, municipioId, passwordHash }
-        })
+        }) 
     }
 
 }
-
-export { UserRepository }
+  
+export { UserRepository }  

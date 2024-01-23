@@ -5,6 +5,6 @@ import { UpdateUserUseCase } from "./UpdateUserUseCase"
 
 const userRepository = new UserRepository()
 const updateUserUseCase = new UpdateUserUseCase(userRepository)
-const UpdateUser =  new UpdateUserController(updateUserUseCase)
+const updateUser =  new UpdateUserController(updateUserUseCase)
 
-export  { UpdateUser }
+export  { updateUser }

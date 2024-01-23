@@ -17,12 +17,21 @@ interface ICreateAdminDTO {
     email: string;
     passwordHash: string;
 }
+
+interface IUpdateAdminDTO {
+    id: number,
+    firstName: string;
+    lastName: string;
+    email: string;
+    passwordHash: string | null;
+}
 interface IAdminRepositoryDTO {
     findAdminByEmail(name: string): Promise<Admin | null>
     create(data: ICreateAdminDTO): Promise<Admin>
     findById(id: number): Promise<Admin | null>
     findAll(): Promise<Admin[] | null>
     delete(id: number): Promise<boolean>
+    update(data: IUpdateAdminDTO): Promise<Admin>
 }
 
-export { IAdminRepositoryDTO, ICreateAdminDTO, IcreateUseCaseDTO, IAuthUserDTO }
+export { IAdminRepositoryDTO, ICreateAdminDTO, IcreateUseCaseDTO, IAuthUserDTO, IUpdateAdminDTO }

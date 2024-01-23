@@ -1,6 +1,6 @@
 import { Admin } from "@prisma/client";
 import { prisma } from "../../../../prisma";
-import { IAdminRepositoryDTO, ICreateAdminDTO } from "../IAdminRepository";
+import { IAdminRepositoryDTO, ICreateAdminDTO, IUpdateAdminDTO } from "../IAdminRepository";
 
 class AdminRepository implements IAdminRepositoryDTO {
     constructor() { }
@@ -28,6 +28,12 @@ class AdminRepository implements IAdminRepositoryDTO {
          await prisma.admin.delete({ where: { id }})
          return true
     }
+    async update(data: IUpdateAdminDTO): Promise<Admin> {
+        return await prisma.admin.update({ 
+            where: { id: data.id },
+            data: data
+        })
+   }
 
 }
 

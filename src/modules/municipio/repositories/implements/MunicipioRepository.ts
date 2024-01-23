@@ -1,5 +1,5 @@
 import { Municipio } from "@prisma/client";
-import { ICreateMunicipioDTO, IMunicipioRepositoryDTO } from "../IMunicipioRepository";
+import { ICreateMunicipioDTO, IMunicipioRepositoryDTO, IMunicipioUpdateDTO } from "../IMunicipioRepository";
 import { prisma } from "../../../../prisma";
 
 class MunicipioRepository implements IMunicipioRepositoryDTO {
@@ -28,6 +28,12 @@ class MunicipioRepository implements IMunicipioRepositoryDTO {
     async delete(id: number): Promise<boolean> {
         await prisma.municipio.delete({ where: { id }})
         return true
+    }
+    async update({ administrationId,id,name,provinciaId}: IMunicipioUpdateDTO): Promise<Municipio> {
+       return await prisma.municipio.update({ 
+        where: { id  },
+        data : { administrationId,id,name,provinciaId}
+    })
     }
 
 }

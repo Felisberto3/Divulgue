@@ -5,6 +5,7 @@ import { authAdmin } from "../modules/admin/usecases/authAdmin";
 import { deleteAdmin } from "../modules/admin/usecases/deleteAdmin";
 import { createFirstAdmin } from "../middleware/create-first-admin";
 import { currentUser } from "../middleware/current-user";
+import { updateAdmin } from "../modules/admin/usecases/updateAdmin";
 
 
 
@@ -27,5 +28,8 @@ adminRouter.get('/get/admin/:id', async (req: Request, res: Response) => {
 })
 adminRouter.delete('/delete/admin/:id',currentUser, async (req: Request, res: Response) => {
     return deleteAdmin.handle(req, res)
+})
+adminRouter.put('/put/admin/',currentUser, async (req: Request, res: Response) => {
+    return updateAdmin.handle(req, res)
 })
 export { adminRouter }

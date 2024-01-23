@@ -27,6 +27,13 @@ class ProvinciaRepository implements IProvinciaRepositoryDTO {
         await prisma.provincia.delete({ where: { id }})
         return true
     }
+
+    async update(id: number, name:string): Promise<Provincia> {
+        return await prisma.provincia.update({
+            where:{ id },
+            data: { name}
+        })
+    }
     
      
 }

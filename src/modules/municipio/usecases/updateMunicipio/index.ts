@@ -1,11 +1,12 @@
-import { AdminRepository } from "../../../admin/repositories/implements/AdminRepository"
-import { UpdateAdminController } from "../../../admin/usecases/updateAdmin/UpdateAdminController"
-import { UpdateAdminUseCase } from "../../../admin/usecases/updateAdmin/UpdateAdminUseCase"
+import { MunicipioRepository } from "../../repositories/implements/MunicipioRepository"
+import { UpdateMunicipioController } from "./UpdateMunicipioController"
+import { UpdateMunicipioUseCase } from "./UpdateUserUseCase"
 
 
 
-const adminRepository = new AdminRepository()
-const updateAdminUseCase = new UpdateAdminUseCase(adminRepository)
-const updateAdmin =  new UpdateAdminController(updateAdminUseCase)
 
-export  { updateAdmin }
+const municipioRepository = new MunicipioRepository()
+const updateMunicipioUseCase = new UpdateMunicipioUseCase(municipioRepository)
+const updateMunicipio =  new UpdateMunicipioController(updateMunicipioUseCase)
+
+export  { updateMunicipio }

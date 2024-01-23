@@ -17,6 +17,7 @@ interface IMunicipioUpdateDTO {
     name: string;
     administrationId: number;
     provinciaId: number;
+    adminId?: number
 }
 interface IMunicipioRepositoryDTO {
     findMunicipioByName(name: string): Promise<Municipio | null>

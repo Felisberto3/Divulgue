@@ -9,7 +9,7 @@ class UpdateMunicipioUseCase {
         ) {  }
 
     async execute(data: IMunicipioUpdateDTO){
-
+        // só faz o update quem for adminitrator
         return await this.municipioRepository.update(data)
     }
 }

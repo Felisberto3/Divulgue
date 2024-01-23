@@ -11,8 +11,10 @@ class UpdateAdminController {
         // const { bornDate, email, firstName, surName, img, municipioId, passwordHash } = req.body
 
         //Falta validar com YUP
-
-        const passwordHash = await hash(password, 8)
+        let passwordHash=''
+        if (password) {
+             passwordHash = await hash(password, 8)
+        }
 
         const Admins =  await this.updateAdminUseCase.execute({ email,firstName,id,lastName,passwordHash})
 

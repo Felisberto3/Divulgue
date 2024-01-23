@@ -5,11 +5,11 @@ class GetMunicipioUseCase {
         private municipioRepository: MunicipioRepository,
     ) { }
 
-    async execute(id  : number) {
+    async execute(id: number) {
         if (!id) {
             return await this.municipioRepository.findAll()
         }
-       return await this.municipioRepository.findById(id)
+        return await this.municipioRepository.findById(id)
     }
 }
 

@@ -2,6 +2,7 @@ import { Router,Request,Response } from "express";
 import { createAdministrations } from "../modules/administration/usecases/createAdministration";
 import { getAdministrations } from "../modules/administration/usecases/getAdministration";
 import { deleteAdministrations } from "../modules/administration/usecases/deleteAdministration";
+import { currentUser } from "../middleware/current-user";
 
 
 const administrationsRouter = Router()
@@ -14,7 +15,7 @@ administrationsRouter.get('/get/administrations/:id',async (req:Request, res:Res
     return getAdministrations.handle(req,res)
 })
 
-administrationsRouter.delete('/delete/administrations/:id',async (req:Request, res:Response ) => {
+administrationsRouter.delete('/delete/administrations/:id', currentUser, async (req:Request, res:Response ) => {
     return deleteAdministrations.handle(req,res)
 })
 

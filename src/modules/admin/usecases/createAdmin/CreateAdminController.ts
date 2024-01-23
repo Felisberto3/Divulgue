@@ -8,7 +8,9 @@ class CreateAdminController {
     async handle(req:Request, res:Response) {
         const {  email,firstName,lastName,password } = req.body
 
-        const newAdmin = await this.createAdminUseCase.execute({ email,firstName,lastName,password})
+        const { userId } = req.currenUser
+
+        const newAdmin = await this.createAdminUseCase.execute({ email,firstName,lastName,password}, userId)
 
         const token = jwt.sign(
             { 

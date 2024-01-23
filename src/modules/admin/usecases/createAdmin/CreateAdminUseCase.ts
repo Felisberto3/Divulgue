@@ -7,8 +7,15 @@ class CreateAdminUseCase {
         private adminRepository: AdminRepository
     ) { }
 
-    async execute({ email, firstName, lastName, password }: IcreateUseCaseDTO) {
+    async execute({ email, firstName, lastName, password }: IcreateUseCaseDTO, userId: number) {
 
+        const mainAdmin = await this.adminRepository.findById(userId)
+        if (!mainAdmin) {
+            throw new Error("You are not any administrator");
+        }
+        if (mainAdmin?.type !=='main') {
+            throw new Error("Only main Administrator may delete other administrator");
+        }
         const adminExist = await this.adminRepository.findAdminByEmail(email)
 
         if (adminExist) {

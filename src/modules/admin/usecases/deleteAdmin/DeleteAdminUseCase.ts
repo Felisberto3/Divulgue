@@ -5,9 +5,9 @@ class DeleteAdminUseCase {
         private adminRepository: AdminRepository
         ) {  }
 
-    async execute(id: number){
+    async execute(id: number,userId: number){
 
-        const mainAdmin = await this.adminRepository.findById(id)
+        const mainAdmin = await this.adminRepository.findById(userId)
 
         if (mainAdmin?.type === 'main') {
             return await this.adminRepository.delete(id)

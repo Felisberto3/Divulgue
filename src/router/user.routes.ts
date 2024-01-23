@@ -5,6 +5,8 @@ import { deleteUser } from "../modules/user/usecases/deleteUser";
 
 const userRouter = Router()
 
+
+
 userRouter.post('/create/user',async (req:Request, res:Response ) => {
     return createUser.handle(req,res)
 })

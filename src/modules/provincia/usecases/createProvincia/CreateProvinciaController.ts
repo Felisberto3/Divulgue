@@ -6,8 +6,9 @@ class CreateProvinciaController {
 
     async handle(req:Request, res:Response) {
         const { name  } = req.body
+        const { userId  } = req.currenUser
 
-        const newProvincia = await this.createProvinciaUseCase.execute(name)
+        const newProvincia = await this.createProvinciaUseCase.execute(name, userId)
 
         return res.status(201).json(newProvincia)
     }

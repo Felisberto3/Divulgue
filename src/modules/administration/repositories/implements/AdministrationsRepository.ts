@@ -1,6 +1,6 @@
 import { Administrations } from "@prisma/client";
 import { prisma } from "../../../../prisma";
-import { IAdministrationsRepositoryDTO, ICreateAdministrationsDTO } from "../IAdministrationRepository";
+import { IAdministrationsRepositoryDTO, ICreateAdministrationsDTO, IUpdateAdministrationsDTO } from "../IAdministrationRepository";
 import { boolean, number } from "yup";
 
 class AdministrationsRepository implements IAdministrationsRepositoryDTO {
@@ -35,6 +35,12 @@ class AdministrationsRepository implements IAdministrationsRepositoryDTO {
     async delete(id: number): Promise<boolean> {
         await prisma.administrations.delete({ where: { id }})
         return true
+    }
+    async update({adminId,email,id,name }: IUpdateAdministrationsDTO): Promise<Administrations> {
+        return await prisma.administrations.update({
+            where: { id },
+            data: { adminId,email,name}
+        })
     }
 
 }

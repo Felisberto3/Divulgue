@@ -15,7 +15,7 @@ class UpdateCommentController {
         const Comments =  await this.updateCommentUseCase.execute(
             Number(id),
             userId,
-            {administratonId,desc,postId,img}
+            {administratonId,desc,img}
             )
 
         return res.status(200).json(Comments)

@@ -11,7 +11,6 @@ interface ICreateCommentDTO {
 interface IUpdateCommentDTO {
     desc: string;
     img?: string ;
-    postId: number;
     administratonId: number;
 }
 

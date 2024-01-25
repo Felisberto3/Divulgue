@@ -1,5 +1,6 @@
 import { Request,Response } from "express";
 import { CreateCommentUseCase } from "./CreateCommentUseCase";
+import { schema } from "../../../validation";
 
 class CreateCommentController {
     constructor(private createCommentUseCase: CreateCommentUseCase) { }
@@ -8,7 +9,12 @@ class CreateCommentController {
         let {administratonId,desc,postId,img} = req.body
         const { userId  } = req.currenUser
 
-        //validar os dados com YUP
+        try {
+            await schema.validate(req.body);
+
+        } catch (error) {
+            res.status(400).json({ mensagem: 'Erro de validação', erros: error });
+        }
 
        
         const newComment = await this.createCommentUseCase.execute({administratonId,desc,postId,userId,img})

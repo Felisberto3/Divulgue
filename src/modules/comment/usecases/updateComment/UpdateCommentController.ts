@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import { UpdateCommentUseCase } from "./UpdateCommentUseCase";
+import { schema } from "../../../validation";
 
 
 class UpdateCommentController {
@@ -10,7 +11,12 @@ class UpdateCommentController {
         const { userId } = req.currenUser
         const { administratonId,desc,postId,img } = req.body
 
-        //Falta validar com YUP
+        try {
+            await schema.validate(req.body);
+
+        } catch (error) {
+            res.status(400).json({ mensagem: 'Erro de validação', erros: error });
+        }
 
         const Comments =  await this.updateCommentUseCase.execute(
             Number(id),

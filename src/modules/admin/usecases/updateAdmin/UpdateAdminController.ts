@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import { UpdateAdminUseCase } from "./UpdateAdminUseCase";
 import { hash } from "bcryptjs";
+import { schema } from "../../../validation";
 
 class UpdateAdminController {
     constructor(private updateAdminUseCase: UpdateAdminUseCase) { }
@@ -10,7 +11,12 @@ class UpdateAdminController {
         const { email,firstName,lastName,password} = req.body
         // const { bornDate, email, firstName, surName, img, municipioId, passwordHash } = req.body
 
-        //Falta validar com YUP
+        try {
+            await schema.validate(req.body);
+
+        } catch (error) {
+            res.status(400).json({ mensagem: 'Erro de validação', erros: error });
+        }
         let passwordHash=''
         if (password) {
              passwordHash = await hash(password, 8)

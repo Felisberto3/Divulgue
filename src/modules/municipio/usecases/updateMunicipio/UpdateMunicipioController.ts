@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import { UpdateMunicipioUseCase } from "./UpdateUserUseCase";
+import { schema } from "../../../validation";
 
 class UpdateMunicipioController {
     constructor(private updateMunicipioUseCase: UpdateMunicipioUseCase) { }
@@ -9,7 +10,12 @@ class UpdateMunicipioController {
         const { userId: adminId } = req.currenUser
         const { administrationId,name,provinciaId } = req.body
 
-        //Falta validar com YUP
+        try {
+            await schema.validate(req.body);
+
+        } catch (error) {
+            res.status(400).json({ mensagem: 'Erro de validação', erros: error });
+        }
 
         const Municipios =  await this.updateMunicipioUseCase.execute({ adminId,id:Number(id), administrationId,name,provinciaId})
 

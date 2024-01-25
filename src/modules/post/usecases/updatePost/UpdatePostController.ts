@@ -9,12 +9,13 @@ class UpdatePostController {
     async handle(req: Request, res: Response) {
         const { id } = req.params
         const { userId } = req.currenUser
-        const { administrationId,desc,img} = req.body
+        const { administrationId,desc} = req.body
+
 
         const schema = Yup.object().shape({
-            desc: Yup.string().required(),
-            img: Yup.string().required(),
-            municipioId: Yup.number().required(),
+            desc: Yup.string(),
+            img: Yup.string(),
+            municipioId: Yup.number(),
 
         })
 
@@ -24,6 +25,11 @@ class UpdatePostController {
 
         } catch (error) {
             res.status(400).json({ mensagem: 'Erro de validação', erros: error });
+        }
+        
+        let img = ''
+        if (req.file) {
+             img = req.file.path
         }
 
         const Posts =  await this.updatePostUseCase.execute(

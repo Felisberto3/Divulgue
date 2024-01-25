@@ -8,26 +8,30 @@ class UpdateUserController {
 
     async handle(req: Request, res: Response) {
         const { userId:id } = req.currenUser
-        const { bornDate, email, firstName, surName, img, municipioId, password } = req.body
+        const { bornDate, email, firstName, surName, municipioId, password } = req.body
 
+        let img = ''
+        
+        if (req.file) {
+             img = req.file.path
+        }
         const schema = Yup.object().shape({
-            email: Yup.string().email().required(),
-            password: Yup.string().required(),
-            firstName: Yup.string().required(),
-            surName: Yup.string().required(),
-            bornDate: Yup.string().required(),
-            img: Yup.string().required(),
-            municipioId: Yup.number().required(),
+            email: Yup.string().email(),
+            password: Yup.string(),
+            firstName: Yup.string(),
+            surName: Yup.string(),
+            bornDate: Yup.string(),
+            img: Yup.string(),
+            municipioId: Yup.number(),
 
         })
 
-       
-            try {
-                await schema.validate(req.body);
+        try {
+            await schema.validate(req.body);
 
-            } catch (error) {
-                res.status(400).json({ mensagem: 'Erro de validação', erros: error });
-            }
+        } catch (error) {
+            res.status(400).json({ mensagem: 'Erro de validação', erros: error });
+        }
             
         let passwordHash = ''
         if (password) {

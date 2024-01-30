@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import { DeleteAdministrationUseCase } from "./DeleteAdministrationUseCase";
+import { AppError } from "../../../../error/AppError";
 
 class DeleteAdministrationController {
     constructor(private deleteAdministrationUseCase: DeleteAdministrationUseCase) { }
@@ -9,7 +10,7 @@ class DeleteAdministrationController {
         const { userId } = req.currenUser
 
         if (!Number(id)) 
-            throw new Error("Administration id does not exist");
+            new AppError("Administration id does not exist", 400);
             
         const Administrations =  await this.deleteAdministrationUseCase.execute(Number(id), userId)
 

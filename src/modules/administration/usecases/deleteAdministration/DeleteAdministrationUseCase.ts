@@ -1,3 +1,4 @@
+import { AppError } from "../../../../error/AppError";
 import { AdminRepository } from "../../../admin/repositories/implements/AdminRepository";
 import { AdministrationsRepository } from "../../repositories/implements/AdministrationsRepository"
 
@@ -10,7 +11,7 @@ class DeleteAdministrationUseCase {
     async execute(id: number, userId: number){
         const adminExist = await  this.adminRepository.findById(userId)
         if (!adminExist) {
-            throw new Error("You are not an administrator");
+            new AppError("You are not an administrator", 400);
         }
 
         return await this.administrationRepository.delete(id)

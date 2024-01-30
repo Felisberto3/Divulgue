@@ -1,3 +1,4 @@
+import { AppError } from "../../../../error/AppError";
 import { AdminRepository } from "../../../admin/repositories/implements/AdminRepository";
 import { ICreateAdministrationsDTO } from "../../repositories/IAdministrationRepository"
 import { AdministrationsRepository } from "../../repositories/implements/AdministrationsRepository"
@@ -12,11 +13,11 @@ class CreateAdministrationUseCase {
         const administrationExist = await this.administrationRepository.findByEmail(email)
 
         if (administrationExist) 
-            throw new Error("Administration Already Exist");
+            new AppError("Administration Already Exist", 400);
 
         const admin = await this.adminRepository.findById(adminId)
         if (!admin) 
-            throw new Error("Admin User Id not exist");
+            new AppError("Admin User Id not exist", 400);
 
         return  await this.administrationRepository.create({ adminId,email,name})
 
